@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -71,3 +71,36 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# MongoDB
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://localhost:27017
+            options: {}
+    default_database: polcode_products
+    document_managers:
+        default:
+            auto_mapping: true
+            
+fos_user:
+    db_driver: mongodb 
+    firewall_name: main
+    user_class: Polcode\ProductBundle\Document\User
+    
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+            
+services:
+    sonata.admin.category:
+        class: Polcode\ProductBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Categories", label: "Categories" }
+        arguments: 
+            - ~ 
+            - Polcode\ProductBundle\Document\Category
+            - ~ 
