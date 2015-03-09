@@ -22,10 +22,10 @@ class AppKernel extends Kernel {
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            
             new Sonata\DoctrineMongoDBAdminBundle\SonataDoctrineMongoDBAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            //new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+                //new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

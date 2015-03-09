@@ -7,17 +7,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CategoryAdmin extends Admin {
+class ProductAdmin extends Admin {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'text', array('label' => 'Category name'))
-            ->add('products', 'sonata_type_collection', array(), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable'  => 'position'
-            ))
+            ->add('name', 'text', array('label' => 'Product name'))
+            ->add('description', 'text')
+            ->add('price', null)
         ;
     }
 
@@ -35,7 +32,8 @@ class CategoryAdmin extends Admin {
         $listMapper
             ->addIdentifier('id')
             ->add('name')
-            ->add('creationTimestamp')
+            ->add('description')
+            ->add('price')
         ;
     }
 }

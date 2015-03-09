@@ -9,6 +9,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  */
 class Product {
 
+     /**
+     * @MongoDB\Id(strategy="auto")
+     */
+    protected $id;
+    
     /** @MongoDB\Field(type="string") */
     protected $name;
 
@@ -18,6 +23,16 @@ class Product {
     /** @MongoDB\Field(type="float") */
     protected $price;
 
+
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set name
