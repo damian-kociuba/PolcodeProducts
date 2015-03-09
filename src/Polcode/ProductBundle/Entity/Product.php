@@ -3,6 +3,7 @@
 namespace Polcode\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /** @ORM\Entity */
 class Product {
@@ -18,12 +19,28 @@ class Product {
 
     /** @ORM\Column(type="decimal", scale=2) */
     private $price;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * */
     private $category;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+    
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    public function __toString() {
+        return $this->getName();
+    }
 
     /**
      * Get id
@@ -97,15 +114,13 @@ class Product {
         return $this->price;
     }
 
-
     /**
      * Set category
      *
      * @param \Polcode\ProductBundle\Entity\Category $category
      * @return Product
      */
-    public function setCategory(\Polcode\ProductBundle\Entity\Category $category = null)
-    {
+    public function setCategory(\Polcode\ProductBundle\Entity\Category $category = null) {
         $this->category = $category;
 
         return $this;
@@ -116,8 +131,54 @@ class Product {
      *
      * @return \Polcode\ProductBundle\Entity\Category 
      */
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->category;
+    }
+
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Product
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Product
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

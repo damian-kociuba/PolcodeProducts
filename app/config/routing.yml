@@ -34,3 +34,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+    
+product_crud:
+    resource: @PolcodeProductBundle/Controller/
+    type:     annotation

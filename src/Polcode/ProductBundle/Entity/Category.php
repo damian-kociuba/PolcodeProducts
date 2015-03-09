@@ -15,8 +15,12 @@ class Category {
 
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
-     **/
+     * */
     private $products;
+
+    public function __toString() {
+        return $this->getName();
+    }
 
     /**
      * Get id
@@ -51,8 +55,7 @@ class Category {
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -62,8 +65,7 @@ class Category {
      * @param \Polcode\ProductBundle\Entity\Product $products
      * @return Category
      */
-    public function addProduct(\Polcode\ProductBundle\Entity\Product $products)
-    {
+    public function addProduct(\Polcode\ProductBundle\Entity\Product $products) {
         $this->products[] = $products;
 
         return $this;
@@ -74,8 +76,7 @@ class Category {
      *
      * @param \Polcode\ProductBundle\Entity\Product $products
      */
-    public function removeProduct(\Polcode\ProductBundle\Entity\Product $products)
-    {
+    public function removeProduct(\Polcode\ProductBundle\Entity\Product $products) {
         $this->products->removeElement($products);
     }
 
@@ -84,8 +85,8 @@ class Category {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProducts()
-    {
+    public function getProducts() {
         return $this->products;
     }
+
 }
