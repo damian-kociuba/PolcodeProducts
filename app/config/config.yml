@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallbacks: ["%locale%"] }
+    #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -24,6 +24,7 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    translator: ~
 
 # Twig Configuration
 twig:
@@ -72,21 +73,11 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# MongoDB
-doctrine_mongodb:
-    connections:
-        default:
-            server: mongodb://localhost:27017
-            options: {}
-    default_database: polcode_products
-    document_managers:
-        default:
-            auto_mapping: true
-            
+
 fos_user:
-    db_driver: mongodb 
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: Polcode\ProductBundle\Document\User
+    user_class: Polcode\ProductBundle\Entity\User
     
 sonata_block:
     default_contexts: [cms]
@@ -94,40 +85,3 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
-            
-services:
-    sonata.admin.category:
-        class: Polcode\ProductBundle\Admin\CategoryAdmin
-        tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Categories", label: "Categories" }
-        arguments: 
-            - ~ 
-            - Polcode\ProductBundle\Document\Category
-            - ~ 
-    sonata.admin.product:
-        class: Polcode\ProductBundle\Admin\ProductAdmin
-        tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Products", label: "Products" }
-        arguments: 
-            - ~ 
-            - Polcode\ProductBundle\Document\Product
-            - ~ 
-            
-stof_doctrine_extensions:
-    default_locale: en_US
-
-    # Only used if you activated the Uploadable extension
-    uploadable:
-        # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
-        default_file_path:       %kernel.root_dir%/../web/uploads
-
-        # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
-        mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
-
-        # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
-        default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
-    orm:
-        default: ~
-    mongodb:
-        default: 
-            timestampable:  true
