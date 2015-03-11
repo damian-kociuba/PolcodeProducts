@@ -1,15 +1,20 @@
 {% extends '::base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+{% endblock %}
 
 {% block body -%}
-    <h1>Product creation</h1>
+    <div class="container">
+        <h1>Product creation</h1>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('product') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        {{ form(form) }}
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <a class="btn btn-default" href="{{ path('product') }}">
+                    Back to the list
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
