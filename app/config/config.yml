@@ -62,8 +62,16 @@ doctrine:
         #     path:     "%database_path%"
 
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        mappings:
+            translatable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Translatable\Entity
+                # make sure vendor library location is correct
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -106,3 +114,13 @@ stof_doctrine_extensions:
         default:
             timestampable: true
             sluggable: true
+            
+  
+    
+a2lix_translation_form:
+    locale_provider: default       # [1]
+    locales: [en,pl]          # [1-a]
+    default_locale: en             # [1-b]
+    required_locales: [en]         # [1-c]
+    manager_registry: doctrine      # [2]
+    templating: "A2lixTranslationFormBundle::default.html.twig"      # [3]

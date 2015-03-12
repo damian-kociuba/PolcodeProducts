@@ -46,7 +46,9 @@
                     Edit
                 </a>
             </li>
-            <li>{{ form(delete_form) }}</li>
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <li>{{ form(delete_form) }}</li>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}

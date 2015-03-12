@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Polcode\ProductBundle\Form\ProductType;
 
 class ProductAdmin extends Admin {
 
@@ -16,6 +17,7 @@ class ProductAdmin extends Admin {
                 ->add('price')
                 ->add('description', 'text') //if no type is specified, SonataAdminBundle tries to guess it
                 ->add('category', 'sonata_type_model_list')
+                ->add('translations', 'a2lix_translationsForms'); // [5.a - Mandatory]
         ;
     }
 
