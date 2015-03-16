@@ -12,17 +12,14 @@ use Polcode\ProductBundle\Form\ProductType;
 
 /**
  * Product controller.
- *
- * @Route("/product")
+ *   
  */
 class ProductController extends Controller {
 
     /**
      * Lists all Product entities.
      *
-     * @Route("/", name="product")
-     * @Method("GET")
-     * @Template()
+     * @Template("PolcodeProductBundle:Product:index.html.twig")
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
@@ -36,8 +33,6 @@ class ProductController extends Controller {
     /**
      * Creates a new Product entity.
      *
-     * @Route("/", name="product_create")
-     * @Method("POST")
      * @Template("PolcodeProductBundle:Product:new.html.twig")
      */
     public function createAction(Request $request) {
@@ -80,9 +75,7 @@ class ProductController extends Controller {
     /**
      * Displays a form to create a new Product entity.
      *
-     * @Route("/new", name="product_new")
-     * @Method("GET")
-     * @Template()
+     * @Template("PolcodeProductBundle:Product:new.html.twig")
      */
     public function newAction() {
         $entity = new Product();
@@ -97,9 +90,7 @@ class ProductController extends Controller {
     /**
      * Finds and displays a Product entity.
      *
-     * @Route("/{id}", name="product_show")
-     * @Method("GET")
-     * @Template()
+     * @Template("PolcodeProductBundle:Product:show.html.twig")
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -121,8 +112,6 @@ class ProductController extends Controller {
     /**
      * Finds and displays a Product entity.
      *
-     * @Route("/slug/{slug}", name="product_show_by_slug")
-     * @Method("GET")
      * @Template("PolcodeProductBundle:Product:show.html.twig")
      */
     public function showBySlugAction($slug) {
@@ -153,9 +142,7 @@ class ProductController extends Controller {
     /**
      * Displays a form to edit an existing Product entity.
      *
-     * @Route("/{id}/edit", name="product_edit")
-     * @Method("GET")
-     * @Template()
+     * @Template("PolcodeProductBundle:Product:edit.html.twig")
      */
     public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -197,8 +184,6 @@ class ProductController extends Controller {
     /**
      * Edits an existing Product entity.
      *
-     * @Route("/{id}", name="product_update")
-     * @Method("PUT")
      * @Template("PolcodeProductBundle:Product:edit.html.twig")
      */
     public function updateAction(Request $request, $id) {
@@ -229,9 +214,6 @@ class ProductController extends Controller {
 
     /**
      * Deletes a Product entity.
-     *
-     * @Route("/{id}", name="product_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);

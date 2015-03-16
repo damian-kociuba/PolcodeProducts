@@ -1,0 +1,82 @@
+product:
+    path:       /product/
+    defaults:   { _controller: PolcodeProductBundle:Product:index, _locale: "pl" }
+    methods:    [GET]
+    
+product_with_locale:
+    path:       /{_locale}/product/
+    defaults:   { _controller: PolcodeProductBundle:Product:index }
+    methods:    [GET]
+    
+product_new:
+    path:       /product/new/
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:new, _locale: "pl" }
+    
+product_new_with_locale:
+    path:       /{_locale}/product/new/
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:new }
+    
+product_show_by_slug:
+    path:       /product/slug/{slug}
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:showBySlug, _locale: "pl"  }
+
+product_show_by_slug_with_locale:
+    path:       /{_locale}/product/slug/{slug}
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:showBySlug }
+    
+product_edit:
+    path:       /product/{id}/edit
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:edit, _locale: "pl"  }
+
+product_edit_with_locale:
+    path:       /{_locale}/product/{id}/edit
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:edit }
+    
+product_show:
+    path:       /product/{id}/
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:show, _locale: "pl"  }
+    
+product_show_with_locale:
+    path:       /{_locale}/product/{id}/
+    methods:    [GET]
+    defaults:   { _controller: PolcodeProductBundle:Product:show  }
+    
+product_create:
+    path:       /product/
+    methods:    [POST]
+    defaults:   { _controller: PolcodeProductBundle:Product:create, _locale: "pl"  }
+
+product_create_with_locale:
+    path:       /{_locale}/product/
+    methods:    [POST]
+    defaults:   { _controller: PolcodeProductBundle:Product:create }
+    
+product_update:
+    path:       /product/{id}
+    methods:    [PUT]
+    defaults:   { _controller: PolcodeProductBundle:Product:update, _locale: "pl"  }
+    
+product_update_with_locale:
+    path:       /{_locale}/product/{id}
+    methods:    [PUT]
+    defaults:   { _controller: PolcodeProductBundle:Product:update }
+    
+product_delete:
+    path:       /product/{id}
+    methods:    [DELETE]
+    defaults:   { _controller: PolcodeProductBundle:Product:edit, _locale: "pl"  }
+
+product_delete_with_locale:
+    path:       /{_locale}/product/{id}
+    methods:    [DELETE]
+    defaults:   { _controller: PolcodeProductBundle:Product:edit  }
+    
+
+    

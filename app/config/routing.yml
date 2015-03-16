@@ -35,6 +35,12 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
     
-product_crud:
-    resource: @PolcodeProductBundle/Controller/
-    type:     annotation
+#product_crud:
+#    resource: @PolcodeProductBundle/Controller/
+#    type:     annotation
+
+
+product_crud_default_locale:
+    resource: "@PolcodeProductBundle/Resources/config/routing_products.yml"
+    prefix:   /
+

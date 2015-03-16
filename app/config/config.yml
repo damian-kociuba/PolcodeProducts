@@ -25,7 +25,7 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
-    translator: ~
+    translator: { fallbacks: [en] }
 
 # Twig Configuration
 twig:
@@ -121,7 +121,7 @@ stof_doctrine_extensions:
 a2lix_translation_form:
     locale_provider: default       # [1]
     locales: [en,pl]          # [1-a]
-    default_locale: en             # [1-b]
+#    default_locale: en             # [1-b]
     required_locales: ~        # [1-c]
     manager_registry: doctrine      # [2]
     templating: "A2lixTranslationFormBundle::default.html.twig"      # [3]
