@@ -13,18 +13,16 @@ class ProductAdmin extends Admin {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->add('name', 'text', array('label' => 'Post Title'))
                 ->add('price')
-                ->add('description', 'text') //if no type is specified, SonataAdminBundle tries to guess it
                 ->add('category', 'sonata_type_model_list')
-                ->add('translations', 'a2lix_translationsForms'); // [5.a - Mandatory]
+                ->add('translations', 'a2lix_translations'); // [5.a - Mandatory]
         ;
     }
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
-                ->add('name')
+                //->add('name')
                 ->add('price')
         ;
     }
@@ -36,6 +34,7 @@ class ProductAdmin extends Admin {
                 ->add('name')
                 ->add('price')
                 ->add('description')
+                ->add('slug')
                 ->add('category.name')
         ;
     }

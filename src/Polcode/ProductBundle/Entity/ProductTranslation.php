@@ -3,41 +3,82 @@
 namespace Polcode\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
-
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
- * @ORM\Entity 
- * @ORM\Table(
- * uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
- * "locale", "object_id", "field"
- * })}
- * )
+ * @ORM\Entity
  */
-class ProductTranslation extends AbstractPersonalTranslation {
+class ProductTranslation {
+
+    use ORMBehaviors\Translatable\Translation;
 
     /**
-     * Convinient constructor
-     *
-     * @param string $locale
-     * @param string $field
-     * @param string $value
+     * @ORM\Column(nullable=true)
      */
-    public function __construct($locale = null, $field = null, $value = null) {
-        if ($locale !== null) {
-            $this->setLocale($locale);
-        }
-        if ($field !== null) {
-            $this->setField($field);
-        }
-        if ($value !== null) {
-            $this->setContent($value);
-        }
+    protected $name;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getDescription() {
+        return $this->description;
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="translations")
-     * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
+     * Set name
+     *
+     * @param string $name
+     * @return ProductTranslation
      */
-    protected $object;
+    public function setName($name) {
+        $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return ProductTranslation
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }

@@ -18,37 +18,6 @@ use Polcode\ProductBundle\Form\ProductType;
 class ProductController extends Controller {
 
     /**
-     * @Route("/test", name="product_test")
-     */
-    public function testAction() {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository("PolcodeProductBundle:Product");
-        
-        $prod1 = new Product();
-        $prod1->setName('name');
-        $prod1->setPrice(12.88);
-        $prod1->setDescription('desc');
-        $transPl = new \Polcode\ProductBundle\Entity\ProductTranslation('pl_pl', 'name', 'Nazwa');
-        $transEN = new \Polcode\ProductBundle\Entity\ProductTranslation('en_en', 'name', 'Nejm');
-        $prod1->addTranslation($transPl);
-        $prod1->addTranslation($transEN);
-        
-        $cat = new \Polcode\ProductBundle\Entity\Category();
-        $cat->setName('nazw');
-        $prod1->setCategory($cat);
-        /*$product = $em->find('Polcode\ProductBundle\Entity\Product', 3);
-        $product->setName('my title in de');
-        $product->setDescription('my content in de');
-        $product->setTranslatableLocale('de_de'); // change locale
-         * 
-         */
-        $em->persist($transEN);
-        $em->persist($transPl);
-        $em->persist($prod1);
-        $em->flush();
-    }
-
-    /**
      * Lists all Product entities.
      *
      * @Route("/", name="product")
@@ -159,8 +128,16 @@ class ProductController extends Controller {
     public function showBySlugAction($slug) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PolcodeProductBundle:Product')->findOneBy(array('slug' => $slug));
-
+        //$entity = $em->getRepository('PolcodeProductBundle:Product')->findOneBy(array('slug' => $slug));
+        $qb = $em->createQueryBuilder();
+        $qb->select('p')
+                ->from('PolcodeProductBundle:Product', 'p')
+                ->join('p.translations', 't')
+                ->where('t.slug = :slug')
+                ->setParameter('slug', $slug);
+        
+        $query = $qb->getQuery();
+        $entity = $query->getSingleResult();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Product entity.');
         }
